@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "883792956027",
+    "project_id": "clone-c0dd1",
+    "storage_bucket": "clone-c0dd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883792956027:android:63281904d9c140f7e370de",
+        "android_client_info": {
+          "package_name": "com.appsbymuk.amazon_firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883792956027-im2q99cvkf2032gm6v58g4sbn5cj6r0k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBg30YjBKGqNxrT6dkJ_A-Q1PrbzQifzmg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883792956027-im2q99cvkf2032gm6v58g4sbn5cj6r0k.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "883792956027-oklblruutpnbof648bplc206c24gcoei.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appsbymuk.amazonFirebase"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
