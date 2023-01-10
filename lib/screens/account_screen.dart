@@ -1,3 +1,6 @@
+import 'package:amazon_firebase/model/user_model.dart';
+import 'package:amazon_firebase/providers/user_details_provider.dart';
+import 'package:amazon_firebase/screens/sell_screen.dart';
 import 'package:amazon_firebase/utils/color_themes.dart';
 import 'package:amazon_firebase/utils/constants.dart';
 import 'package:amazon_firebase/utils/utils.dart';
@@ -6,6 +9,7 @@ import 'package:amazon_firebase/widgets/custom_main_button.dart';
 import 'package:amazon_firebase/widgets/products_showcase_list_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AccountScreen extends StatefulWidget {
   const AccountScreen({Key? key}) : super(key: key);
@@ -17,6 +21,7 @@ class AccountScreen extends StatefulWidget {
 class _AccountScreenState extends State<AccountScreen> {
   @override
   Widget build(BuildContext context) {
+
     Size screenSize = Utils().getScreenSize();
     return SafeArea(
       child: Scaffold(
@@ -50,10 +55,10 @@ class _AccountScreenState extends State<AccountScreen> {
                       color: yellowColor,
                       isLoading: false,
                       onPressed: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => const SellScreen()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SellScreen()));
                       }),
                 ),
                 ProductsShowcaseListView(
@@ -105,8 +110,7 @@ class IntroductionWidgetAccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // UserDetailsModel userDetailsModel =
-    //     Provider.of<UserDetailsProvider>(context).userDetails;
+    UserModel userDetail = Provider.of<UserDetailProvider>(context).userDetails;
     return Container(
       height: kAppBarHeight / 2,
       decoration: const BoxDecoration(
@@ -142,11 +146,12 @@ class IntroductionWidgetAccountScreen extends StatelessWidget {
                     ),
                     TextSpan(
                       //text: "${userDetailsModel.name}",
-                      text: "Usman",
+                      text: "${userDetail.name}",
                       style: TextStyle(
                         color: Colors.grey[800],
-                        fontSize: 26,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
+                        overflow: TextOverflow.ellipsis
                       ),
                     ),
                   ],

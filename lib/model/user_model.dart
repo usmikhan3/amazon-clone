@@ -12,10 +12,18 @@ class UserModel {
   });
 
   Map<String, dynamic> getJson() => {
-    'uid': uid,
-    'name': name,
-    'email': email,
-    'address': address,
-  };
+        'uid': uid,
+        'name': name,
+        'email': email,
+        'address': address,
+      };
 
+  factory UserModel.getModelFromJson(Map<String, dynamic> json) {
+    return UserModel(
+      uid: json['uid'],
+      name: json['name'],
+      email: json['email'],
+      address: json['address'],
+    );
+  }
 }

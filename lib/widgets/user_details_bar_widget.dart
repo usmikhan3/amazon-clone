@@ -1,16 +1,18 @@
 import 'package:amazon_firebase/model/user_model.dart';
+import 'package:amazon_firebase/providers/user_details_provider.dart';
 import 'package:amazon_firebase/utils/color_themes.dart';
 import 'package:amazon_firebase/utils/constants.dart';
 import 'package:amazon_firebase/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserDetailsBar extends StatelessWidget {
   final double offset;
-  final UserModel userModel;
+  //final UserModel userModel;
   const UserDetailsBar({
     Key? key,
     required this.offset,
-    required this.userModel,
+   // required this.userModel,
   }) : super(key: key);
 
 
@@ -18,6 +20,8 @@ class UserDetailsBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = Utils().getScreenSize();
+
+    UserModel userDetail = Provider.of<UserDetailProvider>(context).userDetails;
     // UserModel userModel =
     //     Provider.of<UserDetailsProvider>(context).userDetails;
     return Positioned(
@@ -50,7 +54,7 @@ class UserDetailsBar extends StatelessWidget {
                 width: screenSize.width * 0.7,
                 child: Text(
                   //"Deliver to ${userDetails.name} - ${userDetails.address} ",
-                  "Deliver to ${userModel.name} - ${userModel.address}",
+                  "Deliver to ${userDetail.name} - ${userDetail.address}",
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(

@@ -1,6 +1,8 @@
 import 'package:amazon_firebase/model/product_model.dart';
 import 'package:amazon_firebase/model/review_model.dart';
 import 'package:amazon_firebase/model/user_model.dart';
+import 'package:amazon_firebase/providers/user_details_provider.dart';
+import 'package:amazon_firebase/resources/cloudfirestore_methods.dart';
 import 'package:amazon_firebase/utils/color_themes.dart';
 import 'package:amazon_firebase/utils/constants.dart';
 import 'package:amazon_firebase/utils/utils.dart';
@@ -12,8 +14,10 @@ import 'package:amazon_firebase/widgets/review_dialog.dart';
 import 'package:amazon_firebase/widgets/review_widget.dart';
 import 'package:amazon_firebase/widgets/search_bar_widget.dart';
 import 'package:amazon_firebase/widgets/user_details_bar_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductScreen extends StatefulWidget {
   final ProductModel productModel;
@@ -96,15 +100,15 @@ class _ProductScreenState extends State<ProductScreen> {
                               color: Colors.orange,
                               isLoading: false,
                               onPressed: () async {
-                                // await CloudFirestoreClass().addProductToOrders(
-                                //     model: widget.productModel,
-                                //     userDetails:
-                                //     Provider.of<UserDetailsProvider>(
-                                //         context,
-                                //         listen: false)
-                                //         .userDetails);
-                                // Utils().showSnackBar(
-                                //     context: context, content: "Done");
+                                await CloudFirestoreMethods().addProductToOrders(
+                                    model: widget.productModel,
+                                    userDetails:
+                                    Provider.of<UserDetailProvider>(
+                                        context,
+                                        listen: false)
+                                        .userDetails);
+                                Utils().showSnackBar(
+                                    context: context, content: "Done");
                               }),
                           spaceThingy,
                           CustomMainButton(
@@ -115,11 +119,11 @@ class _ProductScreenState extends State<ProductScreen> {
                               color: yellowColor,
                               isLoading: false,
                               onPressed: () async {
-                                // await CloudFirestoreClass().addProductToCart(
-                                //     productModel: widget.productModel);
-                                // Utils().showSnackBar(
-                                //     context: context,
-                                //     content: "Added to cart.");
+                                await CloudFirestoreMethods().addProductToCart(
+                                    productModel: widget.productModel);
+                                Utils().showSnackBar(
+                                    context: context,
+                                    content: "Added to cart.");
                               }),
                           spaceThingy,
                           CustomSimpleRoundedButton(
@@ -134,24 +138,8 @@ class _ProductScreenState extends State<ProductScreen> {
                         ],
                       ),
                     ),
-                   SizedBox(
-                     height: screenSize.height,
-                     child: ListView.builder(
-                       physics: NeverScrollableScrollPhysics(),
-                         itemCount: 3,
-                         itemBuilder: (context, index) {
-                           // ReviewModel model =
-                           // ReviewModel.getModelFromJson(
-                           //     json: snapshot.data!.docs[index]
-                           //         .data());
-                           return const ReviewWidget(review: ReviewModel(
-                             description: "dfsafwrwgsbv",
-                             rating: 3,
-                             senderName: "usman"
-                           ));
-                         }),
-                   )
-                   /* SizedBox(
+
+                    SizedBox(
                         height: screenSize.height,
                         child: StreamBuilder(
                           stream: FirebaseFirestore.instance
@@ -167,6 +155,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               return Container();
                             } else {
                               return ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
                                   itemCount: snapshot.data!.docs.length,
                                   itemBuilder: (context, index) {
                                     ReviewModel model =
@@ -177,19 +166,19 @@ class _ProductScreenState extends State<ProductScreen> {
                                   });
                             }
                           },
-                        ))*/
+                        ))
                   ],
                 ),
               ),
             ),
             UserDetailsBar(
               offset: 0,
-              userModel: UserModel(
+              /*userModel: UserModel(
                 uid: FirebaseAuth.instance.currentUser!.uid,
                 email: "",
                 name: "Usman",
                 address: "Karachi",
-              ),
+              ),*/
             ),
           ],
         ),

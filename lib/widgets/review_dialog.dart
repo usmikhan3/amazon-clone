@@ -1,4 +1,8 @@
+import 'package:amazon_firebase/model/review_model.dart';
+import 'package:amazon_firebase/providers/user_details_provider.dart';
+import 'package:amazon_firebase/resources/cloudfirestore_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rating_dialog/rating_dialog.dart';
 
 class ReviewDialog extends StatelessWidget {
@@ -24,15 +28,15 @@ class ReviewDialog extends StatelessWidget {
       onSubmitted: (RatingDialogResponse res) async {
         print(res.comment);
         print(res.rating);
-        // CloudFirestoreClass().uploadReviewToDatabase(
-        //     productUid: productUid,
-        //     model: ReviewModel(
-        //         senderName:
-        //         Provider.of<UserDetailsProvider>(context, listen: false)
-        //             .userDetails
-        //             .name,
-        //         description: res.comment,
-        //         rating: res.rating.toInt()));
+        CloudFirestoreMethods().uploadReviewToDatabase(
+            productUid: productUid,
+            model: ReviewModel(
+                senderName:
+                Provider.of<UserDetailProvider>(context, listen: false)
+                    .userDetails
+                    .name,
+                description: res.comment,
+                rating: res.rating.toInt()));
       },
     );
   }

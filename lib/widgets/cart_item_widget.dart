@@ -1,4 +1,5 @@
 import 'package:amazon_firebase/model/product_model.dart';
+import 'package:amazon_firebase/resources/cloudfirestore_methods.dart';
 import 'package:amazon_firebase/screens/product_screen.dart';
 import 'package:amazon_firebase/utils/color_themes.dart';
 import 'package:amazon_firebase/utils/utils.dart';
@@ -50,10 +51,13 @@ class CartItemWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                  ProductInformationWidget(
-                    productName: product.productName,
-                    cost: product.cost,
-                    sellerName: product.sellerName,
+                  SizedBox(width: 30,),
+                  Expanded(
+                    child: ProductInformationWidget(
+                      productName: product.productName,
+                      cost: product.cost,
+                      sellerName: product.sellerName,
+                    ),
                   )
                 ],
               ),
@@ -81,7 +85,7 @@ class CartItemWidget extends StatelessWidget {
                 CustomSquareButton(
                     child: const Icon(Icons.add),
                     onPressed: () async {
-                      /*await CloudFirestoreClass().addProductToCart(
+                      await CloudFirestoreMethods().addProductToCart(
                           productModel: ProductModel(
                               url: product.url,
                               productName: product.productName,
@@ -91,7 +95,7 @@ class CartItemWidget extends StatelessWidget {
                               sellerName: product.sellerName,
                               sellerUid: product.sellerUid,
                               rating: product.rating,
-                              noOfRating: product.noOfRating));*/
+                              noOfRating: product.noOfRating));
                     },
                     color: backgroundColor,
                     dimension: 40),
@@ -109,8 +113,9 @@ class CartItemWidget extends StatelessWidget {
                     children: [
                       CustomSimpleRoundedButton(
                           onPressed: () async {
-                            /*CloudFirestoreClass()
-                                .deleteProductFromCart(uid: product.uid);*/
+                            print("delete");
+                            CloudFirestoreMethods()
+                                .deleteProductFromCart(uid: product.uid);
                           },
                           text: "Delete"),
                       const SizedBox(

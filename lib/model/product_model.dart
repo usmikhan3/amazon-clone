@@ -1,4 +1,4 @@
-class ProductModel {
+class   ProductModel {
   final String url;
   final String productName;
   final double cost;

@@ -1,6 +1,8 @@
+import 'package:amazon_firebase/providers/user_details_provider.dart';
 import 'package:amazon_firebase/utils/color_themes.dart';
 import 'package:amazon_firebase/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ScreenLayout extends StatefulWidget {
   const ScreenLayout({Key? key}) : super(key: key);
@@ -29,6 +31,7 @@ class _ScreenLayoutState extends State<ScreenLayout> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<UserDetailProvider>(context).getData();
     return DefaultTabController(
       length: 4,
       child: Scaffold(
